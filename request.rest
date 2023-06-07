@@ -26,3 +26,25 @@ GET http://localhost:3000/api/refresh_token
 
 ### logout
 POST http://localhost:3000/api/logout
+
+### get all stations
+GET http://localhost:3000/api/stations
+
+### create stations
+POST http://localhost:3000/api/stations
+Content-Type: application/json
+
+{
+    "name": "Station Cikampek 2",
+    "city": "Cikampek 2",
+    "address": "Jalan Pahlawan nomer 5 2",
+    "latitude": 0,
+    "longitude": 0
+}
+
+### get station by id
+GET http://localhost:3000/api/stations/1
+
+
+### delete station by id
+DELETE http://localhost:3000/api/stations/1
