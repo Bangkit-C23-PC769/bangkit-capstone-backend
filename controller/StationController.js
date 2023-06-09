@@ -17,7 +17,7 @@ class StationController {
         try {
             const { name, city, address, latitude, longitude } = req.body
 
-            let station = Stations.findOne({
+            let station = await Stations.findOne({
                 where: {
                     name
                 }
