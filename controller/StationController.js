@@ -1,4 +1,6 @@
 import Stations from "../models/StationModel.js";
+import readXlsxFile from "read-excel-file/node";
+import {resolve} from 'path'
 
 class StationController {
     static async list(req, res) {
@@ -83,6 +85,52 @@ class StationController {
             })
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    static async import(req, res) {
+        try {
+            if (req.file == undefined) return res.status(400).send("Please upload an excel file!")
+
+            let path = resolve("uploads/" + req.file.filename)
+
+            readXlsxFile(path).then((rows) => {
+                rows.shift()
+
+                let stations = []
+
+                rows.forEach((row) => {
+                    let station = {
+                        name: row[0],
+                        city: row[1],
+                        address: row[2],
+                        latitude: row[3],
+                        longitude: row[4]
+                    }
+
+                    stations.push(station)
+                })
+
+                Stations.bulkCreate(stations)
+                    .then(() => {
+                        res.status(200).send({
+                        message: "Uploaded the file successfully: " + req.file.originalname,
+                        });
+                    })
+                    .catch((error) => {
+                        res.status(500).send({
+                        message: "Fail to import data into database!",
+                        error: error.message,
+                        });
+                    });
+            })
+
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({
+                message: "Could not upload the file: " + req.file.originalname,
+            });
         }
     }
 }
