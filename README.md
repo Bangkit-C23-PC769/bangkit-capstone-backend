@@ -1,7 +1,7 @@
 # bangkit-capstone-backend
-
+This is REST API for Commute Ease Capstone Project Bangkit 2023
 ## **Api Spesification**
-
+Server : https://commuteease-backend-hia523z72a-et.a.run.app
 ## Register
 
 - Method : POST
@@ -11,7 +11,7 @@
   - Accept: application/json
 - Body:
 
-```
+```json
 {
     "fullname": "string",
     "username": "string",
@@ -23,7 +23,7 @@
 
 - Response
 
-```
+```json
 {
     "success": "bool",
     "message": "string",
@@ -39,7 +39,7 @@
   - Accept: application/json
 - Body:
 
-```
+```json
 {
     "username": "string",
     "password": "string"
@@ -48,7 +48,7 @@
 
 - Response
 
-```
+```json
 {
     "success": "bool",
     "message": "string",
@@ -68,7 +68,7 @@
   - Authorization: Bearer \*jwt
 - Response
 
-```
+```json
 {
     "success": "bool",
     "message": "string",
@@ -78,5 +78,76 @@
         "lastName": "string",
         "email": "string"
     }
+}
+```
+
+
+## List Stations
+
+- Method : GET
+- Endpoint : `/api/stations`
+- Header:
+  - Content-Type: application/json
+  - Accept: application/json
+- Response
+
+```json
+{
+    "success": "bool",
+    "data": [
+        {
+            "id": "int",
+            "name": "string",
+            "city": "string",
+            "address": "string",
+            "latitude": "float",
+            "longitude": "float",
+            "createdAt": "timestamps",
+            "updatedAt": "timestamps"
+        },
+        ...
+    ]
+}
+```
+
+## Get Station By Id
+
+- Method : GET
+- Endpoint : `/api/stations/:id`
+- Header:
+  - Content-Type: application/json
+  - Accept: application/json
+- Response
+
+```json
+{
+    "success": true,
+    "message": "Create data successfully",
+    "data": {
+        "id": "int",
+        "name": "string",
+        "city": "string",
+        "address": "string",
+        "latitude": "float",
+        "longitude": "float",
+        "createdAt": "timestamps",
+        "updatedAt": "timestamps"
+    }
+}
+```
+
+## Delete Station
+
+- Method : DELETE
+- Endpoint : `/api/stations/:id`
+- Header:
+  - Content-Type: application/json
+  - Accept: application/json
+- Response
+
+```json
+{
+    "success": true,
+    "message": "Delete Station Successfully"
 }
 ```

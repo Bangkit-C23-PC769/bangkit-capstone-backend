@@ -43,8 +43,8 @@ Content-Type: application/json
 }
 
 ### get station by id
-GET http://localhost:3000/api/stations/1
+GET http://localhost:3000/api/stations/2
 
 
 ### delete station by id
-DELETE http://localhost:3000/api/stations/1
+DELETE http://localhost:3000/api/stations/3
